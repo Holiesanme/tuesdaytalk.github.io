@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tuesday Talk &mdash; Claude Code &amp; MCP</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background-color: #1a1a2e;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 2rem 1rem;
+    }
+
+    header h1 {
+      font-size: 2.6rem;
+      color: #f0c040;
+      letter-spacing: 0.05em;
+    }
+
+    header .subtitle {
+      margin-top: 0.6rem;
+      font-size: 1rem;
+      color: #a0a8c0;
+      font-style: italic;
+    }
+
+    main {
+      max-width: 760px;
+      width: 90%;
+      margin: 2.5rem auto 3rem;
+    }
+
+    .card {
+      background: #16213e;
+      border-radius: 8px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      margin-bottom: 2rem;
+    }
+
+    .card h2 {
+      font-size: 1.4rem;
+      color: #f0c040;
+      margin-bottom: 1rem;
+    }
+
+    .card p {
+      line-height: 1.85;
+      color: #c8cfe0;
+      margin-bottom: 1rem;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+    }
+
+    .tag {
+      background: #0f3460;
+      color: #a8c0f0;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      font-family: monospace;
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .back a {
+      color: #f0c040;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .back a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+      color: #505870;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Tuesday Talk</h1>
+    <p class="subtitle">This week's session</p>
+  </header>
+
+  <main>
+
+    <div class="card">
+      <h2>Claude Code &amp; the Model Context Protocol</h2>
+      <p>
+        This Tuesday we're diving into two of the most practical tools in the modern AI developer's
+        toolkit: <strong>Claude Code</strong> and the <strong>Model Context Protocol (MCP)</strong>.
+      </p>
+      <p>
+        <strong>Claude Code</strong> is Anthropic's CLI agent that lives in your terminal. It reads
+        your codebase, writes and edits files, runs tests, and executes multi-step tasks — all
+        through natural-language instructions. Think of it as a pair programmer that never needs
+        a coffee break and already knows the whole repo.
+      </p>
+      <p>
+        <strong>MCP (Model Context Protocol)</strong> is the open standard that lets AI models
+        connect to external tools, APIs, and data sources in a structured, secure way. Instead of
+        copying-and-pasting context into a chat window, MCP lets the model reach out and pull
+        exactly what it needs — from databases, file systems, web services, and more — in real time.
+      </p>
+      <div class="tag-row">
+        <span class="tag">claude-code</span>
+        <span class="tag">mcp</span>
+        <span class="tag">ai-tooling</span>
+        <span class="tag">developer-productivity</span>
+        <span class="tag">anthropic</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>What we'll cover</h2>
+      <p>
+        <strong>Part 1 &mdash; Claude Code in practice.</strong> A live walkthrough of using
+        Claude Code to navigate a real codebase, fix bugs, and ship features — entirely from
+        the command line.
+      </p>
+      <p>
+        <strong>Part 2 &mdash; How MCP works.</strong> We'll break down the protocol: hosts,
+        clients, servers, and how tools and resources are exposed to the model. No hand-waving —
+        we'll look at an actual MCP server implementation.
+      </p>
+      <p>
+        <strong>Part 3 &mdash; Putting it together.</strong> Claude Code uses MCP under the hood.
+        We'll see how custom MCP servers extend what Claude Code can do, and how you can build
+        your own to connect your internal systems to an AI agent.
+      </p>
+    </div>
+
+    <div class="back">
+      <a href="index.html">&larr; Back to Tuesday Talk</a>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2026 Tuesday Talk &mdash; tuesdaytalk.github.io
+  </footer>
+
+</body>
+</html>
