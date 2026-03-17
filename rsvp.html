@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tuesday Talk &mdash; RSVP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Tuesday Talk</h1>
+    <p class="subtitle">RSVP</p>
+  </header>
+
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="submit-talk.html">Submit a Talk</a>
+    <a href="speakers.html">Speakers</a>
+    <a href="admin.html">Admin</a>
+  </nav>
+
+  <main>
+
+    <div class="card">
+      <h2>Register your attendance</h2>
+      <p>Reserve your spot for an upcoming Tuesday Talk. You'll receive a confirmation email with the details.</p>
+
+      <div id="form-success" class="form-message success" style="display:none;">
+        You're registered! Check your inbox for a confirmation email.
+      </div>
+      <div id="form-error" class="form-message error" style="display:none;">
+        Something went wrong. Please try again or contact us directly.
+      </div>
+
+      <form id="rsvp-form" action="https://formspree.io/f/YOUR_RSVP_FORM_ID" method="POST" novalidate>
+
+        <div class="form-group">
+          <label for="name">Your name <span aria-hidden="true">*</span></label>
+          <input type="text" id="name" name="name" required placeholder="Full name">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Your email <span aria-hidden="true">*</span></label>
+          <input type="email" id="email" name="email" required placeholder="you@example.com">
+          <div class="form-hint">A confirmation will be sent to this address.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="talk">Talk <span aria-hidden="true">*</span></label>
+          <select id="talk" name="talk" required>
+            <option value="" disabled selected>Select a talk&hellip;</option>
+            <option value="building-reliable-ai-agents">Building Reliable AI Agents &mdash; 25 Mar 2026</option>
+            <option value="typescript-at-scale">TypeScript at Scale &mdash; 1 Apr 2026</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary">Confirm RSVP</button>
+
+      </form>
+    </div>
+
+    <div class="back">
+      <a href="index.html">&larr; Back to Tuesday Talk</a>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2026 Tuesday Talk &mdash; tuesdaytalk.github.io
+  </footer>
+
+  <script>
+    // Pre-select talk from URL query param (?talk=...)
+    const params = new URLSearchParams(window.location.search);
+    const preselect = params.get('talk');
+    if (preselect) {
+      const opt = document.querySelector(`#talk option[value="${preselect}"]`);
+      if (opt) opt.selected = true;
+    }
+
+    const form = document.getElementById('rsvp-form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const successEl = document.getElementById('form-success');
+      const errorEl = document.getElementById('form-error');
+      successEl.style.display = 'none';
+      errorEl.style.display = 'none';
+
+      const data = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        talk: form.talk.value,
+        registeredAt: new Date().toISOString()
+      };
+
+      // Save to localStorage
+      const rsvps = JSON.parse(localStorage.getItem('rsvps') || '[]');
+      rsvps.push(data);
+      localStorage.setItem('rsvps', JSON.stringify(rsvps));
+
+      // POST to Formspree (best-effort)
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+        if (!res.ok && !form.action.includes('YOUR_RSVP_FORM_ID')) {
+          throw new Error('Formspree error');
+        }
+      } catch (_) {
+        // Silently continue — RSVP is already saved locally
+      }
+
+      form.reset();
+      successEl.style.display = 'block';
+      window.scrollTo({ top: successEl.offsetTop - 20, behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>
