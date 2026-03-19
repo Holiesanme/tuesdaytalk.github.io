@@ -5,7 +5,7 @@ A simple static website for Tuesday Talk — a recurring session exploring ideas
 Live at: **https://tuesdaytalk.github.io**
 
 ## Description
-This application has been developed with the help of Claude code during a tuesday talk presentation I held at CLF
+This application has been developed with the help of Claude code during a tuesday talk presentation I held at Cloudflight
 
 
 ## Deployment
